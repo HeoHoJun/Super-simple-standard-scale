@@ -3,52 +3,98 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>초간단 표준 체중계</title>
-	<style>
-		#output {
-		width: 90%;
-		max-width: 400px;
-		height: auto;
-		background: yellow;
-		color: red;
-		font-weight: bolder;
-		padding: 20px;
-		border-radius: 10px;
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-		margin-top: 20px;
-		font-size: 1.1em;
-		line-height: 400px;
-		text-align: center;
-		}
-	</style>
+	<link rel="stylesheet" href="styles.css">
+	<title>체질량 지수(BMI)</title>
 </head>
 <body>
-	<!-- 사용자 입력을 위한 텍스트 박스 -->
-	<input type="text" placeholder="당신의 키를 입력하세요" size="20" id="myHeight">cm
-	<!-- 표준체중 계산 버튼-->
-	<button id="but">표준체중</button>
-	<!-- 초기화 버튼 -->
-	<button id="reset">초기화</button>
-	<!-- 결과를 표시할 영역 -->
-	<div id="output">당신의 표준체중을 알려드립니다.</div>
-	
-	<script type="text/javascript">
-		// 버튼 클릭 시 실행되는 함수
-		but.onclick = function(){
-			// 입력된 키 값을 가져오고 표준체중 계산
-			var standardWeight = (myHeight.value - 100) * 0.9;
-			// 결과 메시지를 생성
-			var finalOutput = "당신의 키는 " + myHeight.value + "cm 이고 표준체중은 " + standardWeight + "kg입니다.";
-			// 결과를 화면에 표시
-			output.innerHTML = finalOutput;
+	<div>
+		<div class="box">
+			<!-- BMI 계산기 제목을 표시하는 헤더 -->
+			<div class="header">⭕ 나의 체질량 지수 (BMI)</div>
+			<!-- BMI에 대한 설명 -->
+			<div class="desc">
+				체질량 지수는 자신의 몸무게(kg)를 키의 제곱(m)으로 나눈 값입니다.<br>
+				체질량 지수는 근육량, 유전적 원인, 다른 개인적 차이를 반영하지 못하는 단점이 있음에도 불구하고<br>
+				조사자들이나 의료인들이 가장 많이 사용하는 방법 중 하나입니다.
+			</div>
+			<!-- BMI 계산 섹션 -->
+			<div class="cal">
+				<div class="user-input">
+					<!-- 키와 몸무게 입력 필드 -->
+					키 <input type="text" id="height"> cm / 체중 <input type="text" id="weight"> kg
+					<!-- BMI 계산 및 초기화 버튼 -->
+					<span class="btn-group">
+						<button style="background-color:lightgray;" onclick="cal_bmi()">계산</button>
+						<button style="background-color:lightgray;" onclick="reset()">초기화</button>
+					</span>
+				</div>
+				<!-- BMI 결과를 표시하는 부분 -->
+				<ul class="result">
+					<li>비만도 결과 : <span id="result"></span> </li>
+					<li>BMI 지수 : <span id="bmi"></span> </li>
+				</ul>
+				<!-- BMI 범위를 나타내는 그래프 -->
+				<div class="graph">
+					<div class="item">
+						<div style="width: 24%; padding-right: 5px;">BMI</div>
+						<div style="width: 20%; padding-right: 20px;">18.5</div>
+						<div style="width: 23%; padding-right: 10px;">23.0</div>
+						<div style="width: 39%; padding-right: 20px;">25.0</div>
+					</div>
+					<!-- 색상으로 구분된 BMI 범위 -->
+					<div class="graph-bar">
+						<div style="width: 25%; background-color: skyblue;">저체중</div>
+						<div style="width: 20%; background-color: greenyellow;">정상</div>
+						<div style="width: 20%; background-color: orange;">과체중</div>
+						<div style="width: 35%; background-color: red;">비만</div>
+					</div>
+					<div>
+						<div style="width: 6%; padding-right: 5px;">체중</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		// BMI를 계산하고 결과를 표시하는 함수
+		function cal_bmi() {
+			var ki = document.getElementById("height").value;
+			var mo = document.getElementById("weight").value;
 
-			// '초기화' 버튼 클릭 시 실행되는 함수
-			document.getElementById("reset").onclick = function(){
-				// 입력 필드 초기화
-				myHeight.value = "";
-				// 결과 영역 초기화
-				output.innerHTML = "당신의 표준체중을 알려드립니다.";
+			if (ki == "") {
+				alert("키를 입력해주세요.");
+				return;
 			}
+
+			if (mo == "") {
+				alert("몸무게를 입력해주세요.");
+				return;
+			}
+
+			// 키를 cm를 m로 변환
+			ki = ki / 100;
+
+			var bmi = mo / (ki * ki);
+
+			// 결과를 화면에 표시
+			document.getElementById('bmi').innerText = bmi.toFixed(2);
+			// BMI 범주를 결정하고 결과를 표시
+			if (bmi < 18.5) {
+				document.getElementById('bmi').innerText = "저체중";
+			} else if (bmi < 23) {
+				document.getElementById('bmi').innerText = "정상";
+			} else if (bmi < 25) {
+				document.getElementById('bmi').innerText = "과체중";
+			} else {
+				document.getElementById('result').innerText = "비만";
+			}
+		}
+		// 입력 필드와 결과를 초기화하는 함수
+		function reset() {
+			document.getElementById("height").value = "";
+			document.getElementById("weight").value = "";
+			document.getElementById("bmi").innerText = "";
+			document.getElementById("result").innerText = "";
 		}
 	</script>
 </body>

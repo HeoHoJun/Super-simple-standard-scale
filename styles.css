@@ -1,0 +1,71 @@
+.box {
+	width: 650px; /* 박스의 너비 설정 */
+	margin: auto; /* 중앙 정렬 */
+}
+
+.header {
+	background-color: green; /* 헤더 배경색 설정 */
+	color: white; /* 텍스트 색상 설정 */
+	padding: 15px; /* 패딩 설정 */
+	font-weight: bold; /* 텍스트 두껍게 */
+}
+
+.desc {
+	background-color: aquamarine; /* 설명 배경색 설정 */
+	padding: 20px; /* 패딩 설정 */
+	margin: 20px; /* 외부 여백 설정 */
+	font-size: 9.5pt; /* 글자 크기 설정 */
+	line-height: 1.8; /* 줄 간격 설정 */
+}
+
+.cal {
+	padding: 20px; /* 패딩 설정 */
+	margin: 20px; /* 외부 여백 설정 */
+	border: 1px solid lightgray; /* 테두리 설정 */
+}
+
+.cal input {
+	width: 60px; /* 입력 필드 너비 설정 */
+	padding: 5px; /* 패딩 설정 */
+	border: 1px solid lightgray; /* 테두리 설정 */
+	text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.cal .btn-group {
+	float: right; /* 버튼 그룹을 오른쪽 정렬 */
+}
+
+.cal button {
+	padding: 5px; /* 버튼 패딩 설정 */
+	width: 70px; /* 버튼 너비 설정 */
+	border: none; /* 테두리 없음 */
+	color: black; /* 텍스트 색상 설정 */
+	cursor: pointer; /* 커서 모양 설정 */
+	font-weight: bold; /* 텍스트 두껍게 */
+}
+
+.cal .result {
+	padding: 0px; /* 패딩 설정 */
+	list-style-type: none; /* 목록 스타일 없음 */
+}
+
+.cal .result span {
+	color: red; /* 결과 텍스트 색상 설정 */
+	font-weight: bold; /* 텍스트 두껍게 */
+}
+
+.graph > div {
+	display: flex; /* Flexbox 레이아웃 사용 */
+	text-align: center; /* 텍스트 중앙 정렬 */
+	padding: 2px; /* 패딩 설정 */
+}
+
+.graph-bar div {
+	color: black; /* 그래프 바 텍스트 색상 설정 */
+	font-weight: bold; /* 텍스트 두껍게 */
+	padding: 8px; /* 패딩 설정 */
+}
+
+.item > div {
+	display: flex; /* Flexbox 레이아웃 사용 */
+}
